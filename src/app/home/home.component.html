@@ -1,0 +1,107 @@
+<!-- <p *ngFor="let case_list of case_list">
+    Kiosk Id : {{ case_list.datetime }}
+</p> -->
+
+<!-- <p *ngFor="let case of cases">
+	kiosk Id:{{ case.payload.doc.data().kiosk_id }}
+	 Location:{{ case.payload.doc.data().button_id }} 
+	 Address:{{ case.payload.doc.data().case_type }} 
+	 Timestamp:{{ case.payload.doc.data().datetime }}
+</p> -->
+
+<div class="">
+    <div class="row">
+        <div class="col m8 s12">
+            <ul class="collection with-header blue card">
+                <li class="collection-header blue-text text-lighten-1">
+                    <h5>&nbsp;&nbsp;&nbsp;&nbsp;Case Trey</h5>
+                </li>
+                <!-- START:REMAINING CASE LISTING--->
+                <li class="collection-item avatar avatar1 " *ngFor="let case_list of case_list | reverse">
+                    <p>kiosk Id : {{ case_list.kiosk_id}} </p>
+                    <img src="http://www.divdat.com/wp-content/uploads/2018/01/kiosks.png" alt="" class=" circle">
+                    <span class="title">Location : {{ case_list.name }}</span>
+                    <p>
+                        Address : {{ case_list.Address }}
+                    </p>
+                    <p style="font-size:12px;" class="text-grey">
+                        <i class="material-icons tiny">access_time</i> {{ case_list.datetime.toDate() | date: 'medium' }}
+                    </p>
+                    <a href="#" class="secondary-content "><i
+							class="material-icons green-text pulse ">send</i></a>
+                </li>
+                <!--STOP:REMAINING CASE LISTING-->
+                <!-- START:REMAINING CASE LISTING-->
+                <!-- <li class="collection-item avatar avatar1" *ngFor="let active_case_list2 of active_case_list2">
+					<img src="http://www.divdat.com/wp-content/uploads/2018/01/kiosks.png" alt="" class=" circle">
+					<span class="title">kodwell Nashik</span>
+					<p>
+						Office-S9, Star Zone Mall, Near Andhashala Stop, 422 101, Nashik Road, Nashik, Maharashtra
+						422214
+					</p>
+					<p style="font-size:12px;" class="text-grey">
+						<i class="material-icons tiny">access_time</i>
+						14 min ago
+					</p>
+					<a (click)="markerClick(active_case_list2)" routerLink="['/case-details']" routerLinkActive="active"
+						class="secondary-content "><i class="material-icons green-text pulse ">send</i></a>
+				</li> -->
+                <!--STOP:REMAINING CASE LISTING-->
+                <!-- START:REMAINING CASE LISTING-->
+                <!-- <li class="collection-item avatar avatar1" *ngFor="let active_case_list2 of active_case_list2">
+					<img src="http://www.divdat.com/wp-content/uploads/2018/01/kiosks.png" alt="" class=" circle">
+					<span class="title">kodwell Nashik</span>
+					<p>
+						Office-S9, Star Zone Mall, Near Andhashala Stop, 422 101, Nashik Road, Nashik, Maharashtra
+						422214
+					</p>
+					<p style="font-size:12px;" class="text-grey">
+						<i class="material-icons tiny">access_time</i>
+						14 min ago
+					</p>
+					<a (click)="markerClick(active_case_list2)" routerLink="['/case-details']" routerLinkActive="active"
+						class="secondary-content "><i class="material-icons green-text pulse ">send</i></a>
+				</li> -->
+                <!--STOP:REMAINING CASE LISTING-->
+                <!-- START:REMAINING CASE LISTING-->
+                <!-- <li class="collection-item avatar avatar1" *ngFor="let active_case_list2 of active_case_list2">
+					<img src="http://www.divdat.com/wp-content/uploads/2018/01/kiosks.png" alt="" class=" circle">
+					<span class="title">kodwell Nashik</span>
+					<p>
+						Office-S9, Star Zone Mall, Near Andhashala Stop, 422 101, Nashik Road, Nashik, Maharashtra
+						422214
+					</p>
+					<p style="font-size:12px;" class="text-grey">
+						<i class="material-icons tiny">access_time</i>
+						14 min ago
+					</p>
+					<a (click)="markerClick(active_case_list2)" routerLink="['/case-details']" routerLinkActive="active"
+						class="secondary-content "><i class="material-icons green-text pulse ">send</i></a>
+				</li> -->
+                <!--STOP:REMAINING CASE LISTING-->
+            </ul>
+            <ul class="pagination">
+                <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+                <li class="active"><a href="#!">1</a></li>
+                <li class="waves-effect"><a href="#!">2</a></li>
+                <li class="waves-effect"><a href="#!">3</a></li>
+                <li class="waves-effect"><a href="#!">4</a></li>
+                <li class="waves-effect"><a href="#!">5</a></li>
+                <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+            </ul>
+        </div>
+        <div class="col m4 s12">
+            <div class="row">
+                <div class="col s12 ">
+                    <div class="card-panel white ighten-3 center">
+                        <div class="employees">
+                            <h2 class="timer count-title count-number counter-count counter-value z-depth-3 cyan pulse" [CountTo]="this.case_count" [from]="0" [duration]="2"></h2>
+                            <p class="employee-p">Case Count</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br /><br />
