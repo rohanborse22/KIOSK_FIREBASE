@@ -21,15 +21,15 @@
                     <!-- videoo start -->
                     <div class="card z-depth-5">
                         <div class="video-container">
-                            <iframe class="img1" width="600" height="315" src="https://www.youtube.com/embed/utBlkrO0mwk?autoplay=1" frameborder="0" allow="accelerometer;  encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <iframe class="img1" width="600" height="315" [attr.src]="link" frameborder="0" allow="accelerometer;  encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </div>
-                        <span class="badge" style="margin-top:31px;margin-right:12px;"><b></b></span>
+                        <span class="badge" style="margin-top:31px;margin-right:12px;"><b>5 min ago</b></span>
                         <div class="card-content">
                             <p>
                                 <i class="material-icons">location_on</i>
-                                <span style="font-size:17px;"></span>
+                                <span style="font-size:17px;"><b>{{name}}</b></span>
                             </p>
-                            <!-- <p><span> class="text-grey text-darken-2"Office-S9, Star Zone Mall, Near Andhashala Stop, 422 101, Nashik Road, Nash</span>ik, Maharashtra 422214</p> -->
+                            <p><span class="text-grey text-darken-2">{{address}}</span></p>
                         </div>
                     </div>
                     <!-- video end  -->
@@ -39,28 +39,14 @@
                 <div class="col s12">
                     <!-- map start -->
                     <div class="card">
-                        <!--   <agm-map
-              [latitude]="lat"
-              [longitude]="lng"
-              [fullscreenControl]="true"
-              [usePanning]="true"
-              [mapTypeControl]="true"
-              [zoom]="18"
-            >
-              <agm-marker [latitude]="lat" [longitude]="lng">
-                <agm-snazzy-info-window
-                  [latitude]="lat"
-                  [longitude]="lng"
-                  [maxWidth]="50"
-                  [closeWhenOthersOpen]="true"
-                >
-                  <ng-template>
-                    kodwell Technology
-                  </ng-template>
-                </agm-snazzy-info-window>
-              </agm-marker>
-            </agm-map> -->
-                        <div id="map"></div>
+                        <agm-map [latitude]="lat" [longitude]="lng" [fitBounds]="true" [fullscreenControl]="true" [usePanning]="false" [disableDefaultUI]="true" [zoom]="12" [mapTypeControl]="true">
+                            <agm-marker [latitude]="lat" [longitude]="lng" [agmFitBounds]="true" [animation]="'BOUNCE'">
+                                <agm-info-window [disableAutoPan]="true">
+                                    {{name}} <strong> <br/>{{address}}</strong>
+                                </agm-info-window>
+                            </agm-marker>
+                        </agm-map>
+                        <!-- <div id="map"></div> -->
                     </div>
                     <!-- map end -->
                 </div>

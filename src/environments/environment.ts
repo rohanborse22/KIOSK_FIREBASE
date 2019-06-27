@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  config : {
+  config: {
   // apiKey: "AIzaSyDxKWavd81Ildl25c0JdTPqvJa4klo4D8U",
   // authDomain: "kiosk-d5bf8.firebaseapp.com",
   // databaseURL: "https://kiosk-d5bf8.firebaseio.com",

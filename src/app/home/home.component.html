@@ -9,6 +9,22 @@
 	 Timestamp:{{ case.payload.doc.data().datetime }}
 </p> -->
 
+
+<div class="container">
+    <nav class="navbar-fixed" style="background: transparent;">
+        <div class="nav-wrapper">
+            <a routerLink="/" routerLinkActive="active" class="brand-logo left">KIOSK</a>
+            <ul class="right hide-on-med-and-down right">
+                <li>
+                    <b>Rohan Borse</b> &nbsp;
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZ0g-UATwhvdb7Zt7SUoZZEjb2kWnNtQR0KW_lVfb62OYKRItf" width="35" height="35" class="circle right" style="margin-top:15px;border-radius: 50%; margin-right: 15px;">
+                </li>
+                <li><a class="red btn">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+</div>
+
 <div class="">
     <div class="row">
         <div class="col m8 s12">
@@ -17,7 +33,7 @@
                     <h5>&nbsp;&nbsp;&nbsp;&nbsp;Case Trey</h5>
                 </li>
                 <!-- START:REMAINING CASE LISTING--->
-                <li class="collection-item avatar avatar1 " *ngFor="let case_list of case_list | reverse">
+                <li class="collection-item avatar avatar1 " *ngFor="let case_list of case_list | paginate: { itemsPerPage: 2, currentPage: p }">
                     <p>kiosk Id : {{ case_list.kiosk_id}} </p>
                     <img src="http://www.divdat.com/wp-content/uploads/2018/01/kiosks.png" alt="" class=" circle">
                     <span class="title">Location : {{ case_list.name }}</span>
@@ -27,7 +43,7 @@
                     <p style="font-size:12px;" class="text-grey">
                         <i class="material-icons tiny">access_time</i> {{ case_list.datetime.toDate() | date: 'medium' }}
                     </p>
-                    <a href="#" class="secondary-content "><i
+                    <a [routerLink]="['/case-details', case_list.case_id]" class="secondary-content "><i
 							class="material-icons green-text pulse ">send</i></a>
                 </li>
                 <!--STOP:REMAINING CASE LISTING-->
@@ -80,14 +96,16 @@
 				</li> -->
                 <!--STOP:REMAINING CASE LISTING-->
             </ul>
+
             <ul class="pagination">
-                <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+                <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                <!-- <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
                 <li class="active"><a href="#!">1</a></li>
                 <li class="waves-effect"><a href="#!">2</a></li>
                 <li class="waves-effect"><a href="#!">3</a></li>
                 <li class="waves-effect"><a href="#!">4</a></li>
                 <li class="waves-effect"><a href="#!">5</a></li>
-                <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+                <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li> -->
             </ul>
         </div>
         <div class="col m4 s12">
@@ -104,4 +122,4 @@
         </div>
     </div>
 </div>
-<br /><br />
+<br/><br/>

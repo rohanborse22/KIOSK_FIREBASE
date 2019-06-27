@@ -11,6 +11,8 @@
   },
   "private": true,
   "dependencies": {
+    "@agm/core": "^1.0.0-beta.6",
+    "@agm/snazzy-info-window": "^1.0.0-beta.6",
     "@angular/animations": "~8.0.0",
     "@angular/common": "~8.0.0",
     "@angular/compiler": "~8.0.0",
@@ -22,8 +24,10 @@
     "@angular/router": "~8.0.0",
     "angular-count-to": "0.0.3",
     "firebase": "^6.1.0",
+    "ngx-pagination": "^3.2.1",
     "ngx-pipes": "^2.5.1",
     "rxjs": "~6.4.0",
+    "snazzy-info-window": "^1.1.0",
     "tslib": "^1.9.0",
     "zone.js": "~0.9.1"
   },
