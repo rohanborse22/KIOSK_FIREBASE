@@ -2,13 +2,13 @@
     <nav class="navbar-fixed" style="background: transparent;">
         <div class="nav-wrapper">
             <a routerLink="/home" routerLinkActive="active" class="brand-logo left">KIOSK</a>
-            <ul class="right hide-on-med-and-down right">
+            <!-- <ul class="right hide-on-med-and-down right">
                 <li>
                     <b>Rohan Borse</b> &nbsp;
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZ0g-UATwhvdb7Zt7SUoZZEjb2kWnNtQR0KW_lVfb62OYKRItf" width="35" height="35" class="circle right" style="margin-top:15px;border-radius: 50%; margin-right: 15px;">
                 </li>
                 <li><a class="red btn">Logout</a></li>
-            </ul>
+            </ul> -->
         </div>
     </nav>
 </div>
@@ -55,62 +55,27 @@
         <div class="row">
             <div class="col l4 s12">
                 <div class="col l12 s12">
+
                     <ul class="collection with-header ">
                         <li class="collection-header center orange lighten-1 white-text">
                             <p><b>Near by Police Station</b></p>
                         </li>
-                        <li class="collection-item avatar">
+                        <li class="collection-item avatar" *ngFor="let police_list of police_list">
                             <p>
-                                <i class="material-icons text-grey text-darken-3"> security</i> Bytco Police Station<br />
+                                <i class="material-icons text-grey text-darken-3"> security</i>{{ police_list.name}}<br />
                             </p>
                             <p>
                                 <i class="material-icons text-grey text-darken-3">
-                  local_phone</i> 0253 230 5237<br />
+                  local_phone</i>{{ police_list.phone_number}}<br />
                             </p>
                             <p>
                                 <i class="material-icons text-grey text-darken-3"> near_me</i>
-                                <span class="text-grey text-darken-2">Bytco Police Station,Datta Mandir Bus Stop,Nashikroad,
-                  Nashik, Maharashtra</span><br />
+                                <span class="text-grey text-darken-2">{{ police_list.address}}</span><br />
                             </p>
 
-                            <a href="#!" class="secondary-content" style="color:grey"><i class="material-icons">room</i>500 m</a>
+                            <a href="#" class="secondary-content" style="color:grey"><i class="material-icons">room</i>{{ police_list.distance}}</a>
                         </li>
-                        <li class="collection-item avatar">
-                            <!-- <img src="images/yuna.jpg" alt="" class="circle" /> -->
-                            <p>
-                                <i class="material-icons text-grey text-darken-3"> security</i> Upnagar signal Police Station<br />
-                            </p>
-                            <p>
 
-                                <i class="material-icons text-grey text-darken-3">
-                  local_phone</i> 0253 241 5641<br />
-                            </p>
-                            <p>
-                                <i class="material-icons text-grey text-darken-3"> near_me</i>
-                                <span class="text-grey text-darken-2">
-                  Upnagar Police Station,Nashik,Maharashtra 422214</span><br />
-                            </p>
-                            <span class="secondary-content" style="color:grey" style="color:grey"><i class="material-icons">room</i>
-                <span>1 km</span></span>
-                        </li>
-                        <li class="collection-item avatar">
-                            <!-- <img src="images/yuna.jpg" alt="" class="circle" /> -->
-                            <p>
-                                <i class="material-icons text-grey text-darken-3"> security</i> Mumbai Naka Police Station<br />
-                            </p>
-                            <p>
-
-                                <i class="material-icons text-grey text-darken-3">
-                  local_phone</i> 0253 241 8511<br />
-                            </p>
-                            <p>
-                                <i class="material-icons text-grey text-darken-3"> near_me</i>
-                                <span class="text-grey text-darken-2">
-                  Old Agra Road Highwey,Nashik,Maharashtra 422214</span><br />
-                            </p>
-                            <span class="secondary-content" style="color:grey" style="color:grey"><i class="material-icons">room</i>
-                <span>4 km</span></span>
-                        </li>
                     </ul>
                 </div>
 
@@ -119,60 +84,26 @@
                         <li class="collection-header center blue lighten-1 white-text">
                             <p><b>Near by Hospitals </b></p>
                         </li>
-                        <li class="collection-item avatar">
-                            <!-- <img src="images/yuna.jpg" alt="" class="circle" /> -->
-                            <p>
-                                <i class="material-icons text-grey text-darken-3">
-                  local_hospital</i> Sujata Birla Hospital<br />
-                            </p>
-                            <p>
-                                <i class="material-icons text-grey text-darken-3">
-                  local_phone</i> 0253 246 7667<br />
-                            </p>
-                            <p>
-                                <i class="material-icons text-grey text-darken-3"> near_me</i>
-                                <span class="text-grey text-darken-2">Sujata Birla Hospital & Medical Research Center,Opposite
-                  Bytco College,Nashik Road,Nashik</span><br />
-                            </p>
 
-                            <a href="#!" class="secondary-content" style="color:grey"><i class="material-icons">room</i>150 m</a>
-                        </li>
 
-                        <li class="collection-item avatar">
-                            <p>
-                                <i class="material-icons text-grey text-darken-3">
-                  local_hospital</i> Bytco Hospitals<br />
-                            </p>
-                            <p>
-                                <i class="material-icons text-grey text-darken-3">
-                  local_phone</i> 0253 246 5357<br />
-                            </p>
-                            <p>
-                                <i class="material-icons text-grey text-darken-3"> near_me</i>
-                                <span class="text-grey text-darken-2">Bytco Hospitals, Nasik Mahanagar Pali, Jdc Bytco, Nasik Road,
-                  Shahoo Path, Shahoo Path, Nashik, Maharashtra 422214</span><br />
-                            </p>
 
-                            <a href="#!" class="secondary-content" style="color:grey"><i class="material-icons">room</i>1 km</a>
-                        </li>
-                        <li class="collection-item avatar">
+                        <li class="collection-item avatar" *ngFor="let hospital_list of hospital_list">
                             <p>
                                 <i class="material-icons text-grey text-darken-3">
-                  local_hospital</i> Shatabdi Hospital<br />
+                  local_hospital</i>{{hospital_list.name}}<br />
                             </p>
                             <p>
                                 <i class="material-icons text-grey text-darken-3">
-                  local_phone</i> 0253 669 1666<br />
+                  local_phone</i>{{ hospital_list.phone_number}}<br />
                             </p>
                             <p>
                                 <i class="material-icons text-grey text-darken-3"> near_me</i>
                                 <span class="text-grey text-darken-2">
-                  Mumbai-Agra Road, Wadala Rd, Dwarka Circle, Near, Nashik,
-                  Maharashtra 422001</span><br />
+                                    {{ hospital_list.address}}</span><br />
                             </p>
 
-                            <a href="#!" class="secondary-content" style="color:grey">
-                                <i class="material-icons">room</i>4 km</a>
+                            <a href="#" class="secondary-content" style="color:grey">
+                                <i class="material-icons">room</i>{{ hospital_list.distance}}</a>
                         </li>
                     </ul>
                 </div>
@@ -233,7 +164,7 @@
 <!-- <swal #deleteSwal title="Do yo want to close case" text="This case remove from case list" type="info"
   [showCancelButton]="true" [focusCancel]="true" (confirm)="case_close()">
 </swal> -->
-<div class="fixed-action-btn">
+<!-- <div class="fixed-action-btn">
     <a class="btn-floating btn-large red pulse z-depth-5 tooltipped" data-position="top" data-tooltip="Case Close">
         <i class="large material-icons">clear</i>
     </a>
@@ -251,6 +182,6 @@
             <a class="btn-floating blue"><i class="material-icons">attach_file</i></a>
         </li>
     </ul>
-</div>
+</div> -->
 
 <div class="section"></div>

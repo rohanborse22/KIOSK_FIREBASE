@@ -3,6 +3,7 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
 import { ActivatedRoute } from '@angular/router';
 import { CasesService } from '../cases.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-case-details',
@@ -25,6 +26,8 @@ export class CaseDetailsComponent implements OnInit {
   address: any;
   lat: number;
   lng: number;
+  police_list: Object;
+  hospital_list: Object;
   constructor(private sanitizer:DomSanitizer,private firebaseService: CasesService, private route: ActivatedRoute, private firestore: AngularFirestore) { }
 
   ngOnInit() {
@@ -32,31 +35,38 @@ export class CaseDetailsComponent implements OnInit {
       this.id = params['id'];
       //  console.log(this.id);
       this.sellectAllNews1(this.id);
-      this.hospital_list();
+      // this.hospital_list();
       // this.police_list();
     });
 
   }
 
-  sellectAllNews1 = (id) =>
-  this.firebaseService.sellectAllNews1(id).subscribe(i => {
+  sellectAllNews1 = (id) => this.firebaseService.sellectAllNews1(id).subscribe(i => {
     this.case_details = i;
-    // console.log(this.case_details);
-    // console.log('case_id:',this.case_details.kiosk_id);
+    //  console.log(this.case_details);
+    console.log('case_id:',this.case_details.kiosk_id);
     this.firebaseService.sellectAllNews2(this.case_details.kiosk_id).subscribe(async i => {
       this.kiosk_details = i;
       const clients = [];
       clients.push(this.case_details);
       clients.push(this.kiosk_details);
       const res =await Promise.all(clients);
-      console.log(res);
+      // console.log(res);
       this.datetime=res[0].datetime;
       this.name=res[1].name;
       this.address=res[1].Address;
       this.lat=res[1].lat;
       this.lng=res[1].long;
       this.link=this.sanitizer.bypassSecurityTrustResourceUrl(res[1].link);
-      console.log(this.name);
+      // console.log(this.name);
+      this.firebaseService.police_list(this.lat, this.lng).subscribe(data => {
+        console.log(data);
+        this.police_list=data;
+      });
+      this.firebaseService.hospital_list(this.lat, this.lng).subscribe(data => {
+        console.log(data);
+        this.hospital_list=data;
+      });
     });
   })
 
@@ -69,22 +79,22 @@ export class CaseDetailsComponent implements OnInit {
 
 
     // This case list display remaing listing
-  public hospital_list() {
-    this.firebaseService.hospital_list(19.9975,73.7898).subscribe(data => {
-      console.log(data);
-      // this.case_info = JSON.stringify(data);
-      // let case_info = JSON.parse(this.case_info);
-      // this.hospital_lat = parseFloat(case_info.lat);
-      // this.hospital_lng = parseFloat(case_info.lng);
-      // console.log("Latitude/Longitude", this.hospital_lat);
-      // this.apiService
-      //   .hospital_list(this.hospital_lat, this.hospital_lng)
-      //   .subscribe(data => {
-      //     this.hospital_list1 = data;
-      //     console.log("hospital Lists", this.hospital_list1);
-      //   });
-    });
-  }
+  // public hospital_list() {
+  //   this.firebaseService.hospital_list(19.9975,73.7898).subscribe(data => {
+  //     console.log("hospital_list",data);
+  //     // this.case_info = JSON.stringify(data);
+  //     // let case_info = JSON.parse(this.case_info);
+  //     // this.hospital_lat = parseFloat(case_info.lat);
+  //     // this.hospital_lng = parseFloat(case_info.lng);
+  //     // console.log("Latitude/Longitude", this.hospital_lat);
+  //     // this.apiService
+  //     //   .hospital_list(this.hospital_lat, this.hospital_lng)
+  //     //   .subscribe(data => {
+  //     //     this.hospital_list1 = data;
+  //     //     console.log("hospital Lists", this.hospital_list1);
+  //     //   });
+  //   });
+  // }
 
   // This case list display remaing listing
   // public police_list() {

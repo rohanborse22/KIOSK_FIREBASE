@@ -30,10 +30,10 @@
         <div class="col m8 s12">
             <ul class="collection with-header blue card">
                 <li class="collection-header blue-text text-lighten-1">
-                    <h5>&nbsp;&nbsp;&nbsp;&nbsp;Case Trey</h5>
+                    <h5>&nbsp;&nbsp;&nbsp;&nbsp;Case Tray</h5>
                 </li>
                 <!-- START:REMAINING CASE LISTING--->
-                <li class="collection-item avatar avatar1 " *ngFor="let case_list of case_list | paginate: { itemsPerPage: 2, currentPage: p }">
+                <li class="collection-item avatar avatar1 " *ngFor="let case_list of case_list | paginate: { itemsPerPage: 4, currentPage: p }">
                     <p>kiosk Id : {{ case_list.kiosk_id}} </p>
                     <img src="http://www.divdat.com/wp-content/uploads/2018/01/kiosks.png" alt="" class=" circle">
                     <span class="title">Location : {{ case_list.name }}</span>

@@ -7,22 +7,18 @@ import { DatePipe } from '@angular/common';
 import {NgPipesModule} from 'ngx-pipes';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-
-
-
 @Injectable({
   providedIn: 'root',
 })
-
 
 export class CasesService {
   id: any;
   items: Observable<Cases[]>;
   case_id: any;
   currentMessage: any;
-  forEach(arg0: (value: any) => void) {
-    throw new Error("Method not implemented.");
-  }
+  // forEach(arg0: (value: any) => void) {
+  //   throw new Error("Method not implemented.");
+  // }
   CasesCollection: AngularFirestoreCollection<Cases>;
   feedItem: Observable<Feed[]>;
 
@@ -31,7 +27,7 @@ export class CasesService {
 
   constructor(private firestore: AngularFirestore,private httpClient:HttpClient) { }
   collectionInitialization() {
-    //this.CasesCollection = this.firestore.collection('cases');
+    // this.CasesCollection = this.firestore.collection('cases');    
     this.CasesCollection = this.firestore.collection('cases',ref=>ref.orderBy('datetime','desc'));
     this.feedItem = this.CasesCollection.snapshotChanges().pipe(map(changes => {
       return changes.map(change => {
@@ -43,7 +39,7 @@ export class CasesService {
         const id=this.id;
         return this.firestore.doc('kiosk/' + kiosk_id).valueChanges().pipe(map((KioskData: Kiosk) => {
           return Object.assign(
-            { Address: KioskData.Address,case_id:id, name: KioskData.name, kiosk_id: kiosk_id, datetime: datetime });
+            { Address: KioskData.Address,case_id:id,name: KioskData.name,kiosk_id: kiosk_id,datetime: datetime });
         }
         ));
       });
@@ -94,12 +90,13 @@ export class CasesService {
 
   hospital_list(hospital_lat,hospital_lng)
   {
-    return this.httpClient.get('http://kodwell.co.uk/KIOSK_API/KIOSK_SUPPORT/kiosk/getListWithDataHospital?lat=19.9975&lng=73.7898&count=5&case_type=2&pagetoken=');
+    return this.httpClient.get('http://kodwell.co.uk/KIOSK_API/KIOSK_SUPPORT/kiosk/getListWithDataHospital?lat=19.9975&lng=73.7898&count=5&case_type=2&pagetoken=') ;
 
   }
   police_list(police_lat,police_lng)
   {    
-    return this.httpClient.get('http://kodwell.co.uk/KIOSK_API/KIOSK_SUPPORT/kiosk/getListWithDataPolice?lat='+police_lat+'&lng='+police_lng+'&count=5&case_type=2&pagetoken=', { responseType: 'text' });
+    
+    return this.httpClient.get('http://kodwell.co.uk/KIOSK_API/KIOSK_SUPPORT/kiosk/getListWithDataPolice?lat='+police_lat+'&lng='+police_lng+'&count=5&case_type=2&pagetoken=');
 
   }
 
