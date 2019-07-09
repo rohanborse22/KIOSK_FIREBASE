@@ -51,7 +51,7 @@ export class CaseDetailsComponent implements OnInit {
       clients.push(this.case_details);
       clients.push(this.kiosk_details);
       const res =await Promise.all(clients);
-      // console.log(res);
+      console.log(res);
       this.datetime=res[0].datetime;
       this.name=res[1].name;
       this.address=res[1].Address;
@@ -78,7 +78,7 @@ export class CaseDetailsComponent implements OnInit {
     })
 
 
-    // This case list display remaing listing
+  // This case list display remaing listing
   // public hospital_list() {
   //   this.firebaseService.hospital_list(19.9975,73.7898).subscribe(data => {
   //     console.log("hospital_list",data);

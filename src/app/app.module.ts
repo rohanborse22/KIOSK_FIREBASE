@@ -12,6 +12,7 @@ import { NgPipesModule } from 'ngx-pipes';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { AgmCoreModule } from '@agm/core';
 import {AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,7 @@ import {AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
     }),
     AgmSnazzyInfoWindowModule
   ],
-  providers: [DatePipe],
+  providers: [DatePipe,{provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]
 })
 export class AppModule {

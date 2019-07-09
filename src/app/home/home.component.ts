@@ -9,8 +9,9 @@ import { DatePipe } from '@angular/common';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  p: number = 1;
+  collection: any[];  
   public case_count: number;
-
   count = {
     countTo: this.case_count,
     from: 0,
