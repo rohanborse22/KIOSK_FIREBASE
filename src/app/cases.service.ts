@@ -90,7 +90,7 @@ export class CasesService {
 
   hospital_list(hospital_lat,hospital_lng)
   {
-    return this.httpClient.get('http://kodwell.co.uk/KIOSK_API/KIOSK_SUPPORT/kiosk/getListWithDataHospital?lat=19.9975&lng=73.7898&count=5&case_type=2&pagetoken=') ;
+    return this.httpClient.get('http://kodwell.co.uk/KIOSK_API/KIOSK_SUPPORT/kiosk/getListWithDataHospital?lat='+hospital_lat+'&lng='+hospital_lng+'&count=5&case_type=2&pagetoken=') ;
 
   }
   police_list(police_lat,police_lng)
