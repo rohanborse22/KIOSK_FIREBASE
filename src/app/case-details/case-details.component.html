@@ -1,6 +1,7 @@
 <div class="container">
     <nav class="navbar-fixed" style="background: transparent;">
         <div class="nav-wrapper">
+
             <a routerLink="/home" routerLinkActive="active" class="brand-logo left">KIOSK</a>
             <!-- <ul class="right hide-on-med-and-down right">
                 <li>
@@ -76,20 +77,20 @@
                         <li class="collection-header center orange lighten-1 white-text">
                             <p><b>Near by Police Station</b></p>
                         </li>
-                        <li class="collection-item avatar" *ngFor="let police_list of police_list">
+                        <li class="collection-item avatar" *ngFor="let police_list of police_list | orderBy : 'duration'">
                             <p>
                                 <i class="material-icons text-grey text-darken-3"> security</i>{{ police_list.name}}<br />
                             </p>
                             <p>
                                 <i class="material-icons text-grey text-darken-3">
-                  local_phone</i>{{ police_list.phone_number}}<br />
+                                       local_phone</i>{{ police_list.phone_number}}<br />
                             </p>
                             <p>
                                 <i class="material-icons text-grey text-darken-3"> near_me</i>
                                 <span class="text-grey text-darken-2">{{ police_list.address}}</span><br />
                             </p>
 
-                            <a href="#" class="secondary-content" style="color:grey"><i class="material-icons">room</i>{{ police_list.distance}}</a>
+                            <a href="#" class="secondary-content" style="color:grey"><i class="material-icons">room</i>{{ police_list.duration}}</a>
                         </li>
 
                     </ul>
@@ -103,7 +104,7 @@
 
 
 
-                        <li class="collection-item avatar" *ngFor="let hospital_list of hospital_list">
+                        <li class="collection-item avatar" *ngFor="let hospital_list of hospital_list | orderBy : 'duration'">
                             <p>
                                 <i class="material-icons text-grey text-darken-3">
                   local_hospital</i>{{hospital_list.name}}<br />
@@ -119,7 +120,7 @@
                             </p>
 
                             <a href="#" class="secondary-content" style="color:grey">
-                                <i class="material-icons">room</i>{{ hospital_list.distance}}</a>
+                                <i class="material-icons">room</i>{{ hospital_list.duration}}</a>
                         </li>
                     </ul>
                 </div>
@@ -177,6 +178,7 @@
         </div>
     </div>
 </div>
+
 <!-- <swal #deleteSwal title="Do yo want to close case" text="This case remove from case list" type="info"
   [showCancelButton]="true" [focusCancel]="true" (confirm)="case_close()">
 </swal> -->
