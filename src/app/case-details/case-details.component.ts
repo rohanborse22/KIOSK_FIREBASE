@@ -77,7 +77,7 @@ export class CaseDetailsComponent implements OnInit {
       console.log(this.case_details);
     })
 
-
+  // 
   // This case list display remaing listing
   // public hospital_list() {
   //   this.firebaseService.hospital_list(19.9975,73.7898).subscribe(data => {
