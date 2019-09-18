@@ -36,7 +36,7 @@
                     <!-- video end  -->
 
                     <!-- videoo start -->
-                    <div class="card z-depth-5">
+                    <!-- <div class="card z-depth-5">
                         <div class="video-container">
                             <iframe class="img1" width="600" height="315" [attr.src]="link" frameborder="0" allow="accelerometer;  encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </div>
@@ -48,7 +48,7 @@
                             </p>
                             <p><span class="text-grey text-darken-2">{{address}}</span></p>
                         </div>
-                    </div>
+                    </div> -->
                     <!-- video end -->
                 </div>
             </div>
@@ -130,50 +130,28 @@
                         <li class="collection-header center red lighten-1 white-text">
                             <p><b>Near by Volunteers </b></p>
                         </li>
-                        <li class="collection-item avatar">
-                            <!-- <img src="images/yuna.jpg" alt="" class="circle" /> -->
+                        <li class="collection-item avatar" *ngFor="let volunteer_list of volunteer_list | orderBy : 'duration'">
                             <p>
                                 <i class="material-icons text-grey text-darken-3">
-                  account_circle</i> Rohan Borse<br />
+                  account_circle</i>{{volunteer_list.fname}} {{volunteer_list.lname}}<br />
                             </p>
                             <p>
                                 <i class="material-icons text-grey text-darken-3">
-                  local_phone</i> +91-8055389747
+                  local_phone</i> {{volunteer_list.phone}}
                                 <br />
                             </p>
                             <p>
                                 <i class="material-icons text-grey text-darken-3"> near_me</i>
-                                <span class="text-grey text-darken-2">Bytco hospital,Nasik Mahanagar Pali, Jdc Bytco, Nasik Road,
-                  Nashik 422214</span>
+                                <span class="text-grey text-darken-2">{{volunteer_list.address}} - {{volunteer_list.pincode}}</span>
                                 <br />
                             </p>
 
                             <a href="#!" class="secondary-content" style="color:grey">
-                                <i class="material-icons">room</i>150 m</a>
-                        </li>
-
-                        <li class="collection-item avatar">
-                            <p>
-                                <i class="material-icons text-grey text-darken-3">
-                  account_circle</i> Rushikesh Patil<br />
-                            </p>
-                            <p>
-                                <i class="material-icons text-grey text-darken-3">
-                  local_phone</i> +91-7767057209
-                                <br />
-                            </p>
-                            <p>
-                                <i class="material-icons text-grey text-darken-3"> near_me</i>
-                                <span class="text-grey text-darken-2">Sahyadri hospital,Mumbai-Agra Road, Wadala Rd, Dwarka Circle,
-                  Near, Nashik, Maharashtra 422001</span>
-                                <br />
-                            </p>
-
-                            <a href="#!" class="secondary-content" style="color:grey">
-                                <i class="material-icons">room</i>1 km</a>
+                                <i class="material-icons">room</i>30 min</a>
                         </li>
                     </ul>
                 </div>
+
             </div>
         </div>
     </div>

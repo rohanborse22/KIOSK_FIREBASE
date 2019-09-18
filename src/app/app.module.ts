@@ -29,7 +29,9 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
     AngularFirestoreModule,
     CountToModule,
     AgmCoreModule.forRoot({
-      apiKey : 'AIzaSyCpMCI0p-Hm-AdUW66-wR9XaiGDyN4q0CU'
+      // AIzaSyCfDCU_Ht7oL0a7V515xwjxueIou-dAv_c
+      // AIzaSyCpMCI0p-Hm-AdUW66-wR9XaiGDyN4q0CU
+      apiKey : 'AIzaSyB7xgr156h2ZbXkDJxFkgaw5fpRtbwgPXY'
     }),
     AgmSnazzyInfoWindowModule
   ],

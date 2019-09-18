@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { CasesService } from '../cases.service';
 import { Router,ActivatedRoute } from '@angular/router';
 import { DatePipe } from '@angular/common';
-
+import { AngularFirestore, AngularFirestoreCollection,AngularFirestoreDocument  } from '@angular/fire/firestore';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import 'rxjs/add/operator/take';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -19,8 +21,16 @@ export class HomeComponent implements OnInit {
   };
   case_details: {};
   case_list: any;
-  constructor(private firebaseService: CasesService, private datePipe: DatePipe,private router:Router) { }
-
+  public volunteer_list:any[];
+  volunteer_case_list: any[];
+  get_volunteer_list: unknown[];
+ 
+  constructor(private httpClient:HttpClient,private firestore: AngularFirestore,public firebaseService: CasesService, private datePipe: DatePipe,private router:Router) {
+    // this.firebaseService.volunteer_list().subscribe(volunteer_list => {
+    //   this.volunteer_list = volunteer_list;
+    //   console.log(this.volunteer_list);
+    // });
+   }
   ngOnInit() {
     var ddMMyyyy = this.datePipe.transform(new Date(), "dd-MM-yyyy");
     // console.log(ddMMyyyy); //output - 14-02-2019
@@ -34,16 +44,62 @@ export class HomeComponent implements OnInit {
     // this.getCases();
     // this.getCasesDetails();
     // this.getObjectById();
+    
     this.firebaseService.sellectAllNews().subscribe(case_list => {
       this.case_list = case_list;
       this.case_count = case_list.length;
-      console.log(case_list);
+      console.log("view case count:",this.case_count);
+      console.log("view case list:",this.case_list);
+    })
+
+
+    this.firebaseService.case_list().subscribe(volunteer_case_list => {
+      this.volunteer_case_list = volunteer_case_list;
+      for(let case_value of volunteer_case_list ) {
+        if(case_value['sms']==null)
+        {
+          this.firebaseService.volunteer_list().take(1).subscribe(get_volunteer_list => {
+            this.get_volunteer_list = get_volunteer_list;
+            for(let value of get_volunteer_list )
+            {
+            // this.firebaseService.update_case_sms(case_value['customIdName'],'1');
+            // KIOSK Emergency Alert -CITY CENTER! \n LIVE VIDEO : https://youtu.be/nSUOchCqpm8
+            // var sms_log= this.httpClient.get('http://kodwell.co.uk/kios_volunteer_sms/myfile.php?phone='+value['phone']+'&msg=KIOSK Emergency Alert -CITY CENTER! \n LIVE VIDEO : https://youtu.be/nSUOchCqpm8');
+           console.log("get_volunteer_list_value",value); 
+           this.firebaseService.send_kiosk_sms(value['phone']).subscribe(sms_status =>{
+              console.log("sms ststus:",sms_status);
+              this.firebaseService.update_case_sms(case_value['customIdName'],'1');
+             });           
+            }
+          })
+        }
+        // else{
+          // console.log("else");
+          // var sms_status=this.httpClient.get('http://kodwell.co.uk/kios_volunteer_sms/myfile.php?phone=8208755519&msg=hello%20avinash%20test');
+        // this.firebaseService.send_kiosk_sms('7767057209','sms').subscribe(sms_status =>{
+        //   console.log(sms_status);
+        //  });
+         
+          
+        // }
+      }
+      // this.case_count = volunteer_case_list.length;
+      // volunteer_case_list.forEach(function(value){
+      //   if(value['sms']==null)
+      //   { 
+      //     console.log(this.volunteer_case_list);
+      //     //sms send karneka code hona chaiye 
+      //     //yahape value update karneka code hona chaiye 
+      //   }
+      //     console.log(value['sms']);
+      //   })
+
+     console.log("volunteer case list",this.volunteer_case_list);
     })
 
   }
 
   cases;
-
   goToProductDetails(id){
     this.router.navigate(['/product-details', id]);
   }

@@ -28,6 +28,7 @@ export class CaseDetailsComponent implements OnInit {
   lng: number;
   police_list: Object;
   hospital_list: Object;
+  volunteer_list:any;
   constructor(private sanitizer:DomSanitizer,private firebaseService: CasesService, private route: ActivatedRoute, private firestore: AngularFirestore) { }
 
   ngOnInit() {
@@ -43,7 +44,7 @@ export class CaseDetailsComponent implements OnInit {
 
   sellectAllNews1 = (id) => this.firebaseService.sellectAllNews1(id).subscribe(i => {
     this.case_details = i;
-    //  console.log(this.case_details);
+    //console.log(this.case_details);
     console.log('case_id:',this.case_details.kiosk_id);
     this.firebaseService.sellectAllNews2(this.case_details.kiosk_id).subscribe(async i => {
       this.kiosk_details = i;
@@ -67,6 +68,12 @@ export class CaseDetailsComponent implements OnInit {
         console.log(data);
         this.hospital_list=data;
       });
+      // this.case_details.kiosk_id pass kara volunteer_list function madhye
+      this.firebaseService.volunteer_list().subscribe(volunteer_list => {
+        this.volunteer_list = volunteer_list;
+        // this.case_count = volunteer_list.length;
+        console.log(volunteer_list);
+      })
     });
   })
 
