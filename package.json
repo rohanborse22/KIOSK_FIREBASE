@@ -23,7 +23,7 @@
         "@angular/platform-browser-dynamic": "~8.0.0",
         "@angular/router": "~8.0.0",
         "angular-count-to": "0.0.3",
-        "firebase": "^6.1.0",
+        "firebase": "^6.6.1",
         "ngx-pagination": "^3.2.1",
         "ngx-pipes": "^2.5.1",
         "rxjs": "~6.4.0",
