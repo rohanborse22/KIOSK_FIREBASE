@@ -32,19 +32,23 @@ export class CasesService {
     this.feedItem = this.CasesCollection.snapshotChanges().pipe(map(changes => {
       return changes.map(change => {
         const data = change.payload.doc.data();
+        console.log("data",data);
         this.id =change.payload.doc.id;
         const orderCollection=this.firestore.collection('cases');
+        const button_id = data.button_id;
         const kiosk_id = data.kiosk_id;
         const datetime = data.datetime;
         const id=this.id;
+        // const button_id =data.button_id;
         return this.firestore.doc('kiosk/' + kiosk_id).valueChanges().pipe(map((KioskData: Kiosk) => {
           return Object.assign(
-            { Address: KioskData.Address,case_id:id,name: KioskData.name,kiosk_id: kiosk_id,datetime: datetime });
+            {button_id: button_id,Address: KioskData.Address,case_id:id,name: KioskData.name,kiosk_id: kiosk_id,datetime: datetime});
         }
         ));
       });
     }), flatMap(feeds => combineLatest(feeds)));
   }
+  
   
   sellectAllNews() {
     this.collectionInitialization();
@@ -76,6 +80,7 @@ export class CasesService {
 
   case_list(){
     return this.firestore.collection('cases').valueChanges({idField:'customIdName'});
+    
   }
 
   sellectAllNews1(id) {
@@ -94,8 +99,13 @@ export class CasesService {
     return this.firestore.collection('volunteer').valueChanges();
    }
 
+   unread_case_count()
+   {
+    return this.firestore.collection('cases',ref => ref.where('button_id','==',"1")).snapshotChanges();
+  }
+
    update_case_sms(_id: string, _value: string) {
-     console.log(_id + _value);
+     console.log("case_update_ststus:",_id + _value);
     this.firestore.collection('cases').doc(_id).update({sms:_value});
     // let doc = this.firestore.collection('cases', ref => ref.where('datetime', '==', _id));
     // doc.snapshotChanges().subscribe((res: any) => {

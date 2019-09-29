@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { CasesService } from '../cases.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { map } from 'rxjs/operators';
-
+import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-case-details',
   templateUrl: './case-details.component.html',
@@ -29,12 +29,20 @@ export class CaseDetailsComponent implements OnInit {
   police_list: Object;
   hospital_list: Object;
   volunteer_list:any;
-  constructor(private sanitizer:DomSanitizer,private firebaseService: CasesService, private route: ActivatedRoute, private firestore: AngularFirestore) { }
+  constructor(private datePipe: DatePipe,private sanitizer:DomSanitizer,private firebaseService: CasesService, private route: ActivatedRoute, private firestore: AngularFirestore) { }
 
   ngOnInit() {
+    var ddMMyyyy = this.datePipe.transform(new Date(), "dd-MM-yyyy");
+    // console.log(ddMMyyyy); //output - 14-02-2019
+    var MMddyyyy = this.datePipe.transform(new Date(), "MM-dd-yyyy");
+    // console.log(MMddyyyy); //output - 14-02-2019
+    var short = this.datePipe.transform(new Date(), "M/d/yy");
+    // console.log(short); //output - 2/14/19
+    var medium = this.datePipe.transform(new Date(), "MMM d, y, h:mm:ss a");
+    // console.log(medium); //output - Feb 14, 2019, 3:45:06 PM
+
     this.sub = this.route.params.subscribe(params => {
       this.id = params['id'];
-      //  console.log(this.id);
       this.sellectAllNews1(this.id);
       // this.hospital_list();
       // this.police_list();
@@ -44,8 +52,10 @@ export class CaseDetailsComponent implements OnInit {
 
   sellectAllNews1 = (id) => this.firebaseService.sellectAllNews1(id).subscribe(i => {
     this.case_details = i;
-    //console.log(this.case_details);
+    console.log("case_id",this.id);
     console.log('case_id:',this.case_details.kiosk_id);
+
+    this.firestore.collection('cases').doc(id).update({button_id:"2"});
     this.firebaseService.sellectAllNews2(this.case_details.kiosk_id).subscribe(async i => {
       this.kiosk_details = i;
       const clients = [];
@@ -54,6 +64,7 @@ export class CaseDetailsComponent implements OnInit {
       const res =await Promise.all(clients);
       console.log(res);
       this.datetime=res[0].datetime;
+      console.log("date",this.datetime);
       this.name=res[1].name;
       this.address=res[1].Address;
       this.lat=res[1].lat;

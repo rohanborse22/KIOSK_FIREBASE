@@ -24,7 +24,7 @@
                         <div class="video-container">
                             <iframe class="img1" width="600" height="315" [attr.src]="link" frameborder="0" allow="accelerometer;  encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </div>
-                        <span class="badge" style="margin-top:31px;margin-right:12px;"><b>5 min ago</b></span>
+                        <span class="badge" style="margin-top:31px;margin-right:12px;"><b>{{datetime.toDate()|timeAgo}}</b></span>
                         <div class="card-content">
                             <p>
                                 <i class="material-icons">location_on</i>
@@ -56,7 +56,7 @@
                 <div class="col s12">
                     <!-- map start -->
                     <div class="card">
-                        <agm-map [latitude]="lat" [longitude]="lng" [fitBounds]="true" [fullscreenControl]="true" [usePanning]="false" [disableDefaultUI]="true" [zoom]="12" [mapTypeControl]="true">
+                        <agm-map [latitude]="lat" [longitude]="lng" [fitBounds]="true" [fullscreenControl]="true" [usePanning]="false" [mapTypeId]="'satellite'" [disableDefaultUI]="true" [zoom]="8" [mapTypeControl]="true">
                             <agm-marker [latitude]="lat" [longitude]="lng" [agmFitBounds]="true" [animation]="'BOUNCE'">
                                 <agm-info-window [disableAutoPan]="true">
                                     {{name}} <strong> <br/>{{address}}</strong>
@@ -146,8 +146,8 @@
                                 <br />
                             </p>
 
-                            <a href="#!" class="secondary-content" style="color:grey">
-                                <i class="material-icons">room</i>30 min</a>
+                            <!-- <a href="#!" class="secondary-content" style="color:grey">
+                                <i class="material-icons">room</i>30 min</a> -->
                         </li>
                     </ul>
                 </div>

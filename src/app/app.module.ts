@@ -15,16 +15,20 @@ import {AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
-
+// tost import 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule,ToastContainerModule } from 'ngx-toastr';
 // for AngularFireDatabase
 import { AngularFireAuthModule } from "@angular/fire/auth";
-
+// date time ago library
+import {TimeAgoPipe} from 'time-ago-pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     routingComponents,
-    LoginComponent
+    LoginComponent,
+    TimeAgoPipe
   ],
   imports: [
     NgxPaginationModule,
@@ -39,10 +43,18 @@ import { AngularFireAuthModule } from "@angular/fire/auth";
     AgmCoreModule.forRoot({
       // AIzaSyCfDCU_Ht7oL0a7V515xwjxueIou-dAv_c
       // AIzaSyCpMCI0p-Hm-AdUW66-wR9XaiGDyN4q0CU
-      apiKey : 'AIzaSyB7xgr156h2ZbXkDJxFkgaw5fpRtbwgPXY'
+      apiKey : 'AIzaSyB7xgr156h2ZbXkDJxFkgaw5fpRtbwgPXY',
     }),
     AgmSnazzyInfoWindowModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule, // required animations module
+    ToastContainerModule,
+    ToastrModule.forRoot({
+      timeOut: 5000,
+      positionClass: 'toast-top-right',
+      preventDuplicates: true,
+     
+    }) // ToastrModule added
   ],
   providers: [DatePipe,{provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]
@@ -66,6 +78,8 @@ export interface Kiosk {
 }
 
 export interface Cases {
+  case_status: any;
+  button_id: any;
   kiosk_id: string;
   datetime: string;
 }
