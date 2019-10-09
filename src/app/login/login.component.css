@@ -1,0 +1,9 @@
+.success {
+    text-align: center;
+    background-color: #43A047;
+}
+
+.failed {
+    text-align: center;
+    background-color: #e53935;
+}

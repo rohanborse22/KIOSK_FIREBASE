@@ -15,6 +15,7 @@ import {AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
+import { RouterModule, Routes } from '@angular/router';
 // tost import 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule,ToastContainerModule } from 'ngx-toastr';

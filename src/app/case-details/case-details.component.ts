@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
-import { ActivatedRoute } from '@angular/router';
 import { CasesService } from '../cases.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { map } from 'rxjs/operators';
 import { DatePipe } from '@angular/common';
+import { AuthenticationService } from '../service/authentication.service';
+import { Router,ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-case-details',
   templateUrl: './case-details.component.html',
@@ -29,7 +30,9 @@ export class CaseDetailsComponent implements OnInit {
   police_list: Object;
   hospital_list: Object;
   volunteer_list:any;
-  constructor(private datePipe: DatePipe,private sanitizer:DomSanitizer,private firebaseService: CasesService, private route: ActivatedRoute, private firestore: AngularFirestore) { }
+  userDetails: any;
+  user_email: any;
+  constructor(private router:Router,private route: ActivatedRoute,private authService: AuthenticationService,private datePipe: DatePipe,private sanitizer:DomSanitizer,private firebaseService: CasesService, private firestore: AngularFirestore) { }
 
   ngOnInit() {
     var ddMMyyyy = this.datePipe.transform(new Date(), "dd-MM-yyyy");
@@ -40,6 +43,8 @@ export class CaseDetailsComponent implements OnInit {
     // console.log(short); //output - 2/14/19
     var medium = this.datePipe.transform(new Date(), "MMM d, y, h:mm:ss a");
     // console.log(medium); //output - Feb 14, 2019, 3:45:06 PM
+    this.userDetails = this.authService.isUserLoggedIn();
+    this.user_email=this.userDetails.email;
 
     this.sub = this.route.params.subscribe(params => {
       this.id = params['id'];
@@ -49,6 +54,19 @@ export class CaseDetailsComponent implements OnInit {
     });
 
   }
+
+  logoutUser() {
+    this.authService.logout()
+      .then(res => {
+        console.log(res);
+        this.userDetails = undefined;
+        localStorage.removeItem('user');
+        this.router.navigate(['/login']);
+      }, err => {
+      alert(err.message);
+      });
+  }
+ 
 
   sellectAllNews1 = (id) => this.firebaseService.sellectAllNews1(id).subscribe(i => {
     this.case_details = i;
@@ -74,10 +92,14 @@ export class CaseDetailsComponent implements OnInit {
       this.firebaseService.police_list(this.lat, this.lng).subscribe(data => {
         console.log(data);
         this.police_list=data;
+        
+
       });
       this.firebaseService.hospital_list(this.lat, this.lng).subscribe(data => {
         console.log(data);
         this.hospital_list=data;
+     
+        
       });
       // this.case_details.kiosk_id pass kara volunteer_list function madhye
       this.firebaseService.volunteer_list().subscribe(volunteer_list => {

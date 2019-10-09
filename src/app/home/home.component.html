@@ -14,13 +14,13 @@
     <nav class="navbar-fixed" style="background: transparent;">
         <div class="nav-wrapper">
             <a routerLink="/" routerLinkActive="active" class="brand-logo left">KIOSK</a>
-            <!-- <ul class="right hide-on-med-and-down right">
+            <ul class="right hide-on-med-and-down right">
                 <li>
-                    <b>Rohan Borse</b> &nbsp;
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZ0g-UATwhvdb7Zt7SUoZZEjb2kWnNtQR0KW_lVfb62OYKRItf" width="35" height="35" class="circle right" style="margin-top:15px;border-radius: 50%; margin-right: 15px;">
+                    <b>{{this.user_email}}</b> &nbsp;
                 </li>
-                <li><a class="red btn">Logout</a></li>
-            </ul> -->
+                <li><a class="red btn" (click)="logoutUser()">Logout</a></li>
+            </ul>
         </div>
     </nav>
 </div>

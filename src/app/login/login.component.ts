@@ -1,5 +1,6 @@
 import { Component,OnInit } from '@angular/core';
 import { AuthenticationService } from '../service/authentication.service';
+import { Title } from '@angular/platform-browser';
 import {Router} from '@angular/router';
 @Component({
   selector: 'app-login',
@@ -16,13 +17,21 @@ export class LoginComponent implements OnInit {
   passwordInput: string;
   isForgotPassword: boolean;
   userDetails: any;
+  pagetitle: string='Sign-in';
+  type: string;
  
   constructor(
     private authService: AuthenticationService,
+    private titleService: Title,
     private router: Router
   ) {
     this.selectedVal = 'login';
     this.isForgotPassword = false;
+  }
+
+  public setTitle( newTitle: string) {
+    this.titleService.setTitle( newTitle );
+    this.pagetitle=this.titleService.getTitle();
   }
 
   ngOnInit() {
@@ -31,6 +40,12 @@ export class LoginComponent implements OnInit {
   
   // Comman Method to Show Message and Hide after 2 seconds
   showMessage(type, msg) {
+    if (type == "success") {
+      this.type = "success";
+    }
+    else{
+      this.type = "failed";
+    }
     this.responseMessageType = type;
     this.responseMessage = msg;
     setTimeout(() => {
@@ -42,6 +57,12 @@ export class LoginComponent implements OnInit {
   public onValChange(val: string) {
     this.showMessage("", "");
     this.selectedVal = val;
+    if(this.selectedVal == 'login'){
+      this.setTitle("Sign-in");
+    }
+    else{
+      this.setTitle("Sign-up");
+    }
   }
  
   // Check localStorage is having User Data

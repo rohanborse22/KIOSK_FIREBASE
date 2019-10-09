@@ -6,6 +6,8 @@ import { AngularFirestore, AngularFirestoreCollection,AngularFirestoreDocument  
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {Howl, Howler} from 'howler';
 import { ToastrService } from 'ngx-toastr';
+import { AuthenticationService } from '../service/authentication.service';
+
 import 'rxjs/add/operator/take';
 @Component({
   selector: 'app-home',
@@ -26,9 +28,6 @@ export class HomeComponent implements OnInit {
     from: 0,
     duration: 1
   };
-
-  
-  
   case_details: {};
   case_list: any;
   public volunteer_list:any[];
@@ -37,9 +36,12 @@ export class HomeComponent implements OnInit {
   itemCollection: any;
   unread_case_count: number;
   public unread_case_count_status = true;
+  sub: any;
+  user_email: any;
+  userDetails: any;
  
-  constructor(private toastr: ToastrService,private httpClient:HttpClient,private firestore: AngularFirestore,public firebaseService: CasesService, 
-    private datePipe: DatePipe,private router:Router) {
+  constructor(private authService: AuthenticationService,private toastr: ToastrService,private httpClient:HttpClient,private firestore: AngularFirestore,public firebaseService: CasesService, 
+    private datePipe: DatePipe,private router:Router,private route: ActivatedRoute) {
     // this.firebaseService.volunteer_list().subscribe(volunteer_list => {
     //   this.volunteer_list = volunteer_list;
     //   console.log(this.volunteer_list);
@@ -60,6 +62,13 @@ export class HomeComponent implements OnInit {
     // this.getCases();
     // this.getCasesDetails();
     // this.getObjectById();
+    this.userDetails = this.authService.isUserLoggedIn();
+    this.user_email=this.userDetails.email;
+    // this.sub = this.route.params.subscribe(params => {
+    //   this.user_email=params.email;
+    //   console.log(,params);
+    // });
+
 
     this.firebaseService.unread_case_count().subscribe(unread_case_list => {
       this.unread_case_count=unread_case_list.length;
@@ -128,6 +137,19 @@ export class HomeComponent implements OnInit {
     })
 
   }
+
+  logoutUser() {
+    this.authService.logout()
+      .then(res => {
+        console.log(res);
+        this.userDetails = undefined;
+        localStorage.removeItem('user');
+        this.router.navigate(['/login']);
+      }, err => {
+      alert(err.message);
+      });
+  }
+
 
   cases;
   goToProductDetails(id){

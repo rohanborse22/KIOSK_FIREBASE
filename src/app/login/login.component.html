@@ -1,78 +1,117 @@
-<div class="row">
-    <div class="text-center" style="width: 100%;margin: 20px;">
-        <h4>Angular 7 Email/ Password & Google Login Using Firebase Demo</h4>
-    </div>
-    <div class="" style="width: 500px; margin: auto">
+<!-- <div class="container">
+    <nav class="navbar-fixed" style="background: transparent;">
+        <div class="nav-wrapper">
+            <a routerLink="/" routerLinkActive="active" class="brand-logo left">KIOSK</a>
+            <ul class="right hide-on-med-and-down right">
+                <li>
+                    <b>Rohan Borse</b> &nbsp;
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZ0g-UATwhvdb7Zt7SUoZZEjb2kWnNtQR0KW_lVfb62OYKRItf" width="35" height="35" class="circle right" style="margin-top:15px;border-radius: 50%; margin-right: 15px;">
+                </li>
+                <li><a class="red btn">Logout</a></li>
+            </ul> 
+</div>
+</nav>
+</div> -->
 
-        <div class="card">
-            <!-- When Uses is Not Logged In -->
-            <div class="card-body" *ngIf="!userDetails">
-                <div class="row">
-                    <div class="col-sm-12 text-center">
-                        <div class="btn-group">
-                            <button type="button" class="btn" [ngClass]="{'btn-primary
-                active': selectedVal == 'login' }" (click)="onValChange('login')"><strong>Login</strong></button>
-                            <button type="button" class="btn" [ngClass]="{'btn-primary
-                active': selectedVal == 'register' }" (click)="onValChange('register')"><strong>Register</strong></button>
+<div class="section no-pad-bot " id="index-banner">
+    <div class="container-fluid">
+        <br><br/>
+        <!-- registration form start -->
+        <div class="row">
+            <div class="col s4"></div>
+            <div class="col s4 card z-depth-1" method="post">
+                <div class="container center" *ngIf="!userDetails">
+                    <!-- <div class="alert-{{responseMessageType}} {{type}}" role="alert" *ngIf="responseMessage.length">
+                            <header>{{responseMessage}}</header> 
+                    </div> -->
+
+                    <div class="card-panel alert-{{responseMessageType}} {{type}} " role="alert" *ngIf="responseMessage.length">
+                        <span class="white-text text-darken-2">{{responseMessage}}</span>
+                    </div>
+
+                    <h5><b>{{pagetitle}}</b></h5>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">account_circle</i>
+                            <input type="email" class="form-control" [(ngModel)]="emailInput" id="email" placeholder="Email">
+                        </div>
+
+
+                    </div>
+                    <div class="row" *ngIf="!isForgotPassword">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">lock</i>
+                            <input type="password" class="form-control" [(ngModel)]="passwordInput" id="password" placeholder="Password">
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="!isForgotPassword">
+                        <div class="col-2 left" *ngIf="selectedVal == 'login';">
+                            <a href="javascript:void(0)" style="text-decoration: none;" (click)="this.isForgotPassword= true;  this.setTitle('Forgot Password ?');">Forgot Password?</a>
+                        </div>
+                        <div class="col-2 right">
+                            <span *ngIf="selectedVal == 'login'; else elseBlock">
+                                <button type="button" class="btn text-white waves-effect waves-light" style="background-color: #42A5F5" (click)="loginUser()">Log In</button>
+                            </span>
+                            <ng-template #elseBlock>
+                                <button type="button" class="btn text-white waves-effect waves-light" style="background-color: #42A5F5" (click)="registerUser()">Register</button>
+                            </ng-template>
                         </div>
 
                     </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" class="form-control" [(ngModel)]="emailInput" id="email" placeholder="Email">
-                </div>
-                <div class="form-group" *ngIf="!isForgotPassword">
-                    <label for="password">Password</label>
-                    <input type="password" class="form-control" [(ngModel)]="passwordInput" id="password" placeholder="Password">
-                </div>
-                <div class="form-group" *ngIf="!isForgotPassword">
-
-                    <span *ngIf="selectedVal == 'login'; else elseBlock">
-            <button type="button" class="btn btn-primary" (click)="loginUser()">Log
-              In</button>
-          </span>
-                    <ng-template #elseBlock>
-                        <button type="button" class="btn btn-primary" (click)="registerUser()">Register</button>
-                    </ng-template>
-                    &nbsp; &nbsp; &nbsp;
-                    <a href="javascript:void(0)" (click)="this.isForgotPassword= true;">Forgot
-            Password?</a>
+                    <!-- <div class="row" *ngIf="!isForgotPassword">
+                        <span *ngIf="selectedVal == 'login'; else elseBlock">
+                            <div class="row">
+                               <button type="button" class="btn waves-effect waves-light" style="cursor: pointer;" [ngClass]="{'btn-primary active': selectedVal == 'register' }" (click)="onValChange('register')"><strong>Don't have account</strong></button>
+                           </div>
+                       </span>
+                       <span *ngIf="selectedVal == 'register'; else elseBlock">
+                        <div class="row">
+                           <button type="button" class="btn waves-effect waves-light" style="cursor: pointer;" [ngClass]="{'btn-primary active': selectedVal == 'login' }" (click)="onValChange('login')"><strong>Already have account</strong></button>
+                       </div>
+                   </span>
+               </div> -->
+                    <div class="row" *ngIf="isForgotPassword">
+                        <div class="col s6 left">
+                            <button type="button" class="btn waves-effect waves-light" style="background-color: #42A5F5" (click)="this.isForgotPassword=false; this.setTitle('Sign-In')">Cancel</button>
+                        </div>
+                        <div class="col s6 right">
+                            <button type="button" class="btn waves-effect waves-light" style="background-color: #42A5F5" (click)="forgotPassword()">Send Mail</button>
+                        </div>
+                    </div>
 
                 </div>
-                <div class="form-group" *ngIf="isForgotPassword">
-
-                    <button type="button" class="btn" (click)="this.isForgotPassword=
-            false;">Cancel</button>
-                    <button type="button" class="btn btn-primary" (click)="forgotPassword()">Get email to reset passowrd</button>
-                </div>
-                <div class="form-group text-center">
-                    <img src="../assets/images/googlebtn.png" alt="" srcset="" (click)="googleLogin()" style="cursor: pointer;">
-                </div>
-
-            </div>
-
-            <!-- When Uses is Logged In using Email or Google Account -->
-            <div class="card-body" *ngIf="userDetails">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <ul class="list-group">
-                            <li class="list-group-item">Display Name: {{userDetails['displayName']}}
-                            </li>
-                            <li class="list-group-item">Email: {{userDetails['email']}}</li>
-                            <li class="list-group-item">Is Email Varified: {{userDetails['emailVerified']}}
-                            </li>
-                            <li class="list-group-item">
-                                <button type="button" class="btn btn-danger" (click)="logoutUser()">Logout</button>
-                            </li>
-                        </ul>
+                <div class="container" *ngIf="userDetails">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <ul class="list-group">
+                                <li class="list-group-item">Display Name: {{userDetails['displayName']}}
+                                </li>
+                                <li class="list-group-item">Email: {{userDetails['email']}}</li>
+                                <li class="list-group-item">Is Email Varified: {{userDetails['emailVerified']}}
+                                </li>
+                                <li class="list-group-item">
+                                    <button type="button" class="btn btn-danger" (click)="logoutUser()">Logout</button>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
+            <div class="col s4"></div>
         </div>
-        <div class="alert alert-{{responseMessageType}}" role="alert" *ngIf="responseMessage.length">
-            {{responseMessage}}
+        <div class="row center">
+            <div class="row" *ngIf="!isForgotPassword">
+                <span *ngIf="selectedVal == 'login'; else elseBlock">
+                        <div class="row">
+                           <a class="black-text" style="cursor: pointer;" [ngClass]="{'btn-primary active': selectedVal == 'register' }" (click)="onValChange('register')"><strong>Don't have account</strong></a>
+                       </div>
+                   </span>
+                <span *ngIf="selectedVal == 'register'; else elseBlock">
+                    <div class="row">
+                       <a class="black-text" style="cursor: pointer;" [ngClass]="{'btn-primary active': selectedVal == 'login' }" (click)="onValChange('login')"><strong>Already have account</strong></a>
+                   </div>
+               </span>
+            </div>
         </div>
     </div>
 </div>
